@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift Quiz Box</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Baloo 2', sans-serif;
+            background-color: #5CE1E6;
+            color: black;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        #quiz-headings {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #yellow-box {
+            width: 200px;
+            height: 200px;
+            background-color: #FED405;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 5px solid black;
+            text-transform: uppercase; /* Make text uppercase */
+        }
+
+        .color-boxes {
+            display: flex;
+            justify-content: space-between;
+            width: 220px;
+        }
+
+        .color-box {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #green-box {
+            background-color: #7FD15A;
+        }
+
+        #orange-box {
+            background-color: #FF914D;
+        }
+
+        #red-box {
+            background-color: #EE1D23;
+        }
+
+        #purple-box {
+            background-color: #8456E5;
+        }
+
+        #question-answer {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #tagline {
+            margin-top: 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-headings"></div>
+    <div id="yellow-box">TAYLOR SWIFT</div>
+    <div class="color-boxes">
+        <div id="green-box" class="color-box"></div>
+        <div id="orange-box" class="color-box"></div>
+        <div id="red-box" class="color-box"></div>
+        <div id="purple-box" class="color-box"></div>
+    </div>
+    <div id="question-answer"></div>
+    <div id="tagline">QuizHeads. The forever changing trivia board game!</div>
+
+    <script>
+        const yellowBox = document.getElementById("yellow-box");
+        const greenBox = document.getElementById("green-box");
+        const orangeBox = document.getElementById("orange-box");
+        const redBox = document.getElementById("red-box");
+        const purpleBox = document.getElementById("purple-box");
+        const questionAnswerDiv = document.getElementById("question-answer");
+
+        const questionsAndAnswers = [
+            { question: "What was Taylor Swift's debut single?", answer: "Tim McGraw" },
+            { question: "Which album features the hit song 'Love Story'?", answer: "Fearless" },
+            { question: "What year did Taylor Swift release her self-titled debut album?", answer: "2006" },
+            { question: "Which Taylor Swift album includes the song 'Blank Space'?", answer: "1989" },
+            { question: "What is the name of Taylor Swift's 2020 album?", answer: "Folklore" },
+            { question: "Which song did Taylor Swift write about her ex-boyfriend Joe Jonas?", answer: "Forever & Always" },
+            { question: "What is Taylor Swift's lucky number?", answer: "13" },
+            { question: "In which music video did Taylor Swift play a character named 'Catastrophe'?", answer: "You Belong with Me" },
+            { question: "Which Taylor Swift album features the track 'All Too Well'?", answer: "Red" },
+            { question: "What is the name of Taylor Swift's cat?", answer: "Olivia Benson" },
+            { question: "Which song includes the lyrics 'I knew you were trouble when you walked in'?", answer: "I Knew You Were Trouble" },
+            { question: "What is the title of Taylor Swift's 2014 album?", answer: "1989" },
+            { question: "Which Taylor Swift song was inspired by her relationship with Harry Styles?", answer: "Style" },
+            { question: "Who did Taylor Swift collaborate with on the song 'Everything Has Changed'?", answer: "Ed Sheeran" },
+            { question: "In which music video does Taylor Swift appear as a Greek goddess?", answer: "The Lucky One" },
+            { question: "Which song did Taylor Swift perform at the 2015 Victoria's Secret Fashion Show?", answer: "Blank Space" },
+            { question: "What is the name of Taylor Swift's 2012 album?", answer: "Red" },
+            { question: "Which Taylor Swift song is about her feud with Kanye West?", answer: "Famous" },
+            { question: "What year did Taylor Swift win her first Grammy Award?", answer: "2010" },
+            { question: "Which album includes the song 'Bad Blood'?", answer: "1989" },
+            { question: "What was the first single from Taylor Swift's 'Reputation' album?", answer: "Look What You Made Me Do" },
+            { question: "Which song did Taylor Swift release for the film 'The Hunger Games'?", answer: "Safe & Sound" },
+            { question: "What is Taylor Swift's middle name?", answer: "Alison" },
+            { question: "Which Taylor Swift song features the lyric 'We never go out of style'?", answer: "Style" },
+            { question: "Which Taylor Swift album is known for its folk and indie influences?", answer: "Folklore" },
+            { question: "In which music video does Taylor Swift play a character named 'Jenna'?", answer: "We Are Never Ever Getting Back Together" },
+            { question: "What was the name of Taylor Swift's 2016 album?", answer: "Reputation" },
+            { question: "Which song includes the lyrics 'This is a state of grace, this is the worthwhile fight'?", answer: "State of Grace" },
+            { question: "Who features on the track 'End Game' from Taylor Swift's 'Reputation'?", answer: "Ed Sheeran and Future" },
+            { question: "What is the name of Taylor Swift's second studio album?", answer: "Fearless" },
+            { question: "Which song did Taylor Swift release as a single in 2019 that reflects on her experiences in the music industry?", answer: "ME!" },
+            { question: "Which Taylor Swift song features a music video set in a high school football game?", answer: "You Belong with Me" },
+            { question: "What is the name of Taylor Swift's 2017 album?", answer: "Reputation" },
+            { question: "Which Taylor Swift song has the lyric 'You were there when I was in the dark'?", answer: "Holy Ground" },
+            { question: "What is Taylor Swift's first album to feature a more mature sound and style?", answer: "Speak Now" },
+            { question: "Which song did Taylor Swift release as a single in 2019 featuring Brendon Urie?", answer: "ME!" },
+            { question: "What is the name of Taylor Swift's 2008 album?", answer: "Fearless" },
+            { question: "Which Taylor Swift song was inspired by her experiences on tour?", answer: "The Story of Us" },
+            { question: "What year did Taylor Swift release 'Speak Now'?", answer: "2010" },
+            { question: "Which Taylor Swift song features the lyric 'I was enchanted to meet you'?", answer: "Enchanted" },
+            { question: "Which song did Taylor Swift release as a single from her '1989' album that features a music video with a police chase?", answer: "Bad Blood" },
+            { question: "Which Taylor Swift album includes the track 'New Romantics'?", answer: "1989" },
+            { question: "What was Taylor Swift's first number one single on the Billboard Hot 100?", answer: "We Are Never Ever Getting Back Together" },
+            { question: "Which Taylor Swift song was written about her breakup with Calvin Harris?", answer: "I Did Something Bad" },
+            { question: "What is the name of Taylor Swift's 2021 album?", answer: "Red (Taylor's Version)" },
+            { question: "Which Taylor Swift song features the lyrics 'I'm a crumpled up piece of paper lying here'?", answer: "All Too Well" },
+            { question: "What was the title of Taylor Swift's first live album?", answer: "Speak Now World Tour: Live" },
+            { question: "Which Taylor Swift song includes the lyrics 'I'll be cleaning up bottles with you on New Year's Day'?", answer: "New Year's Day" },
+            { question: "What is the name of the song Taylor Swift wrote for the 'Cats' movie?", answer: "Beautiful Ghosts" },
+            { question: "Which Taylor Swift album is known for its red and black cover art?", answer: "Reputation" },
+            { question: "What is the name of the lead single from Taylor Swift's 'Lover' album?", answer: "ME!" },
+            { question: "Which song features the lyric 'I remember how we felt sitting by the water'?", answer: "Red" },
+            { question: "What is the name of Taylor Swift's 2013 album?", answer: "Red" },
+            { question: "Which Taylor Swift song features the lyric 'And I don't know why but with you I'd dance in a storm in my best dress'?", answer: "Fearless" }
+        ];
+
+        let shuffledQuestions = [];
+        let questionIndex = 0;
+
+        // Shuffle the questions array
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Initialize questions
+        function initializeQuestions() {
+            shuffledQuestions = shuffleArray([...questionsAndAnswers]);
+            questionIndex = 0;
+            displayQuestion();
+        }
+
+        // Function to display the current question
+        function displayQuestion() {
+            if (shuffledQuestions.length === 0) {
+                questionAnswerDiv.innerHTML = "<strong>No more questions!</strong>";
+                return;
+            }
+            const currentQA = shuffledQuestions[questionIndex];
+            questionAnswerDiv.innerHTML = `<strong>Question:</strong> ${currentQA.question}<br><strong>Answer:</strong> ${currentQA.answer}`;
+        }
+
+        // Change color of the yellow box when a color box is clicked
+        greenBox.addEventListener("click", () => {
+            yellowBox.style.backgroundColor = "#7FD15A";
+        });
+
+        orangeBox.addEventListener("click", () => {
+            yellowBox.style.backgroundColor = "#FF914D";
+        });
+
+        redBox.addEventListener("click", () => {
+            yellowBox.style.backgroundColor = "#EE1D23";
+        });
+
+        purpleBox.addEventListener("click", () => {
+            yellowBox.style.backgroundColor = "#8456E5";
+        });
+
+        // Generate a random question and display it when the yellow box is clicked
+        yellowBox.addEventListener("click", () => {
+            questionIndex = (questionIndex + 1) % shuffledQuestions.length;
+            displayQuestion();
+        });
+
+        // Initialize questions on page load
+        window.onload = initializeQuestions;
+    </script>
+
+</body>
+</html>
